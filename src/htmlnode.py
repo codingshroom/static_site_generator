@@ -49,7 +49,10 @@ class ParentNode(HTMLNode):
         if not self.children:
             raise ValueError("missing children")
         else:
-            super_concatenation = f"<{self.tag}>"
+            formatted_props = ""
+            if self.props:
+                formatted_props = self.props_to_html()
+            super_concatenation = f"<{self.tag}{formatted_props}>"
             for child in self.children:
                 child_html = child.to_html()
                 super_concatenation += child_html
