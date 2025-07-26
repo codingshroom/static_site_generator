@@ -1,5 +1,6 @@
 import unittest
 from textnode import TextNode, TextType
+from main import text_node_to_htmlnode
 
 
 class TestTextNode(unittest.TestCase):
@@ -24,16 +25,22 @@ class TestTextNode(unittest.TestCase):
         self.assertNotEqual(node, node2)
     
     def test_uneq_2(self):
-        node = TextNode("x", TextType.PLAIN)
-        node2 = TextNode("x", TextType.PLAIN, "https://www.boot.dev")
+        node = TextNode("x", TextType.TEXT)
+        node2 = TextNode("x", TextType.TEXT, "https://www.boot.dev")
         self.assertNotEqual(node, node2)
 
     def test_uneq_3(self):
-        node = TextNode("Hello my friend!", TextType.PLAIN, "https://www.boot.dev")
-        node2 = TextNode("Hello my fiend!", TextType.PLAIN, "https://www.boot.dev")
+        node = TextNode("Hello my friend!", TextType.TEXT, "https://www.boot.dev")
+        node2 = TextNode("Hello my fiend!", TextType.TEXT, "https://www.boot.dev")
         self.assertNotEqual(node, node2)
+
+    def test_text(self):
+        node = TextNode("This is a text node", TextType.TEXT)
+        html_node = text_node_to_htmlnode(node)
+        self.assertEqual(html_node.tag, None)
+        self.assertEqual(html_node.value, "This is a text node")
+
 
 
 if __name__ == "__main__":
     unittest.main()
-
