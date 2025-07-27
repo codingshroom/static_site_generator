@@ -32,8 +32,8 @@ def extract_markdown_links(text):
 
 
 def main():
-    node = TextNode("hi", TextType.BOLD, "https://www.creatingevil.com")
-    print(node)
+    print("nothing here yet")
+
 
 if __name__ == "__main__":
     main()

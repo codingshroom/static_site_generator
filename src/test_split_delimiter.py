@@ -14,12 +14,12 @@ class TestSplitDelimiter(unittest.TestCase):
         node_2 = TextNode("_great_ stuff", TextType.TEXT)
         first = split_nodes_delimiter([node, node_2], "**", TextType.BOLD)
         lst = split_nodes_delimiter(first, "_", TextType.ITALIC)
-        self.assertEqual(str(lst), "[TextNode(a , text, None), TextNode(big, bold, None), TextNode( word, text, None), TextNode(, text, None), TextNode(great, italic, None), TextNode( stuff, text, None)]")
+        self.assertEqual(str(lst), "[TextNode(a , text, None), TextNode(big, bold, None), TextNode( word, text, None), TextNode(great, italic, None), TextNode( stuff, text, None)]")
     
     def test_one_word(self):
         node = TextNode("**ass**", TextType.TEXT)
         lst = split_nodes_delimiter([node], "**", TextType.BOLD)
-        self.assertEqual(str(lst), "[TextNode(, text, None), TextNode(ass, bold, None), TextNode(, text, None)]")
+        self.assertEqual(str(lst), "[TextNode(ass, bold, None)]")
 
     def test_comma(self):
         node = TextNode("what _are_ we, today?", TextType.TEXT)
@@ -31,7 +31,7 @@ class TestSplitDelimiter(unittest.TestCase):
         node_2 = TextNode("lorem", TextType.TEXT)
         node_3 = TextNode("giving _in_", TextType.TEXT)
         lst = split_nodes_delimiter([node, node_2, node_3], "_", TextType.ITALIC)
-        self.assertEqual(str(lst), "[TextNode(return _True_, code, None), TextNode(lorem, text, None), TextNode(giving , text, None), TextNode(in, italic, None), TextNode(, text, None)]")
+        self.assertEqual(str(lst), "[TextNode(return _True_, code, None), TextNode(lorem, text, None), TextNode(giving , text, None), TextNode(in, italic, None)]")
         
     def test_given_bold(self):
         node = TextNode("return **True**", TextType.BOLD)
@@ -48,7 +48,7 @@ class TestSplitDelimiter(unittest.TestCase):
     def test_empty_string(self):
         node = TextNode("", TextType.TEXT)
         lst = split_nodes_delimiter([node], "**", TextType.BOLD)
-        self.assertEqual(str(lst), "[TextNode(, text, None)]")
+        self.assertEqual(str(lst), "[]")
     
     def test_unbalance_delimiters(self):
         node = TextNode("_wrong", TextType.TEXT)
@@ -60,5 +60,8 @@ class TestSplitDelimiter(unittest.TestCase):
         node = TextNode("plain text", TextType.TEXT)
         lst = split_nodes_delimiter([node], "**", TextType.BOLD)
         self.assertEqual(str(lst), "[TextNode(plain text, text, None)]")
-    
 
+
+
+if __name__ == "__main__":
+    unittest.main()

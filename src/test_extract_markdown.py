@@ -27,3 +27,7 @@ class TestExtractMarkdown(unittest.TestCase):
         matches = extract_markdown_links("blabla [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)")
         self.assertListEqual([("to boot dev", "https://www.boot.dev"), ("to youtube", "https://www.youtube.com/@bootdotdev")], matches)
 
+
+
+if __name__ == "__main__":
+    unittest.main()

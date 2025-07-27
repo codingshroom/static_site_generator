@@ -15,6 +15,11 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 new_node = TextNode(parts_of_node[i], TextType.TEXT)
             else:
                 new_node = TextNode(parts_of_node[i], text_type)
-            new_nodes.append(new_node)
+            if new_node.text != "":
+                new_nodes.append(new_node)
     return new_nodes
             
+
+
+if __name__ == "__main__":
+    pass
