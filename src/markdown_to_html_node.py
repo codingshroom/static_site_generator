@@ -7,17 +7,22 @@ from main import text_node_to_htmlnode
 
 
 def markdown_to_html_node(markdown):
+    master_node = ParentNode("html", [])
     blocks = markdown_to_block(markdown)
-    block_node_list = []
     for block in blocks:
-        blocktype = block_to_blocktype(block)
-        children_nodes = text_to_textnodes(block)
-        html_children = []
-        for child in children_nodes:
-            html_child = text_node_to_htmlnode(child)
-            html_children.append(html_child)
-        block_node = ParentNode(blocktype, html_children)
-        block_node_list.append(block_node)
-    super_node = ParentNode("html", block_node_list) # not sure about tag: html, body, something else?!?!
-    return super_node
+        block_type = block_to_blocktype(block)
+        block_node = ParentNode(block_type, [])
+        if block_type == BlockType.CODE:
+            block_node = LeafNode("code", block)
+        else:
+            textnodes = text_to_textnodes(block)
+            for text_node in textnodes:
+                html_node = text_node_to_htmlnode(text_node)
+                block_node.children.append(html_node)
+        master_node.children.append(block_node)
+    return master_node
 
+
+
+if __name__ == "__main__":
+    pass

@@ -1,5 +1,5 @@
 import re
-from textnode import TextNode, TextType
+from textnode import TextType
 from htmlnode import LeafNode
 
 

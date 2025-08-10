@@ -184,7 +184,7 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
         
         >**bold**
         >_italic_
-        >`code``
+        >`code`
         """
         node = markdown_to_html_node(md)
         html = node.to_html()

@@ -26,7 +26,7 @@ class LeafNode(HTMLNode):
     
     def to_html(self):
         if not self.value:
-            raise ValueError("missing tag")
+            raise ValueError("missing value")
         if not self.tag:
             return self.value
         else:
