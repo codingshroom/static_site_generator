@@ -1,5 +1,5 @@
 import unittest
-from main import extract_markdown_links, extract_markdown_images
+from splitters import extract_markdown_links, extract_markdown_images
 
 
 class TestExtractMarkdown(unittest.TestCase):

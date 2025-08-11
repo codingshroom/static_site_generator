@@ -1,3 +1,5 @@
+
+
 class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag  # string
@@ -58,3 +60,7 @@ class ParentNode(HTMLNode):
                 super_concatenation += child_html
             return super_concatenation + f"</{self.tag}>"
         
+
+
+if __name__ == "__main__":
+    pass

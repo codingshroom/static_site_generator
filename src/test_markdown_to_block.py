@@ -1,5 +1,5 @@
 import unittest
-from markdown_to_block import markdown_to_block
+from blocktype import markdown_to_block
 
 
 
@@ -76,8 +76,6 @@ This is the same paragraph on a new line
         blocks = markdown_to_block(md)
         self.assertEqual(blocks, ["lord of the rings"])
         
-
-
 
 
 if __name__ == "__main__":
