@@ -5,13 +5,13 @@ from markdown_to_html_node import markdown_to_html_node
 class TestMarkdownToHtmlNode(unittest.TestCase):
     def test_paragraphs(self):
         md = """
-        This is **bolded** paragraph
-        text in a p
-        tag here
+This is **bolded** paragraph
+text in a p
+tag here
 
-        This is another paragraph with _italic_ text and `code` here
+This is another paragraph with _italic_ text and `code` here
 
-        """
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -21,11 +21,11 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_codeblock(self):
         md = """
-        ```
-        This is text that _should_ remain
-        the **same** even with inline stuff
-        ```
-        """
+```
+This is text that _should_ remain
+the **same** even with inline stuff
+```
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -36,44 +36,44 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_unordered_list(self):
         md = """
-        we have here an unordered list:
-        - who cares
-        - nobody wants to know
-        - what else?
+we have here an unordered list:
+- who cares
+- nobody wants to know        
+- what else?
 
-        **bold spatz**_with italic_`coded gold`
-        """
+**bold spatz**_with italic_`coded gold`
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><p>we have here an unordered list:</p><ul><li>who cares</li><li>nobody wants to know</li><li>what else?</li></ul><p>\n<b>bold spatz</b><i>with italic</i><code>coded gold</code></div>",
+            "<div><p>we have here an unordered list:</p><ul><li>who cares</li><li>nobody wants to know</li><li>what else?</li></ul><p>\n<b>bold spatz</b><i>with italic</i><code>coded gold</code></p></div>",
         )
 
 
     def test_ordered_list(self):
         md = """
-        **bold spatz**_with italic_`coded gold`
-        we have here an ordered list:
-        1. who cares
-        2. nobody wants to know
-        3. what else?
+**bold spatz**_with italic_`coded gold`
+we have here an ordered list:
+1. who cares
+2. nobody wants to know
+3. what else?
 
-        """
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><p>\n<b>bold spatz</b><i>with italic</i><code>coded gold</code><p>we have here an ordered list:</p><ol><li>who cares</li><li>nobody wants to know</li><li>what else?</li></ol></div>",
+            "<div><p><b>bold spatz</b><i>with italic</i><code>coded gold</code>\nwe have here an ordered list:</p><ol><li>who cares</li><li>nobody wants to know</li><li>what else?</li></ol></div>",
         )
 
 
     def test_ordered_list_2(self):
         md = """
-        1. who cares
-        2. nobody wants to know
-        3. what else?
-        """
+1. who cares
+2. nobody wants to know
+3. what else?
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -84,10 +84,10 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_unordered_list_2(self):
         md = """
-        - who cares
-        - nobody wants to know
-        - what else?
-        """
+- who cares
+- nobody wants to know
+- what else?
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -98,10 +98,10 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_ordered_list_wrong(self):
         md = """
-        2. who cares
-        2. nobody wants to know
-        3. what else?
-        """
+2. who cares
+2. nobody wants to know
+3. what else?
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -112,10 +112,10 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_unordered_list_wrong(self):
         md = """
-        - who cares
-        -nobody wants to know
-        - what else?
-        """
+- who cares
+-nobody wants to know
+- what else?
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -126,18 +126,18 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_headings(self):
         md = """
-        # heading1
-        
-        ## heading2
+# heading1
 
-        ### heading3
+## heading2
 
-        #### heading4
+### heading3
 
-        ##### heading5
+#### heading4
 
-        ###### heading6
-        """
+##### heading5
+
+###### heading6
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
@@ -148,65 +148,49 @@ class TestMarkdownToHtmlNode(unittest.TestCase):
 
     def test_quotes(self):
         md = """
-        >who cares
-        >nobody wants to know
-        >what else?
-        """
+>who cares
+>nobody wants to know
+>what else?
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><blockquote>who cares\nnobody wants to know\nwhat else?</blockquote></div>",
+            "<div><quoteblock>who cares\nnobody wants to know\nwhat else?</quoteblock></div>",
         )
 
 
     def test_special_inline(self):
         md = """
-        # heading **with** bold
+# heading **with** bold
         
-        ## _italic_ heading
+## _italic_ heading
 
-        ### head`in`g
+### head`in`g
 
-        #### `heading`
+#### `heading`
 
-        ##### **heading**
+##### **heading**
 
-        ###### _heading_
+###### _heading_
 
-        1. **bold**
-        2. _italic_
-        3. `code`
+1. **bold**
+2. _italic_
+3. `code`
 
-        - **bold**
-        - _italic_
-        - `code`
+- **bold**
+- _italic_
+- `code`
         
-        >**bold**
-        >_italic_
-        >`code`
-        """
+>**bold**
+>_italic_
+>`code`
+"""
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            """
-            <div><h1>heading <b>with</b> bold</h1>
-            <h2><i>italic</i> heading</h2>
-            <h3>head<code>in</code>g</h3>
-            <h4><code>heading</code></h4>
-            <h5><b>heading</b></h5>
-            <h6><i>heading</i></h6></div>
-            <ol><li><b>bold</b></li>
-            <li><i>italic</i></li>
-            <li><code>code</code></li></ol>
-            <ul><li><b>bold</b></li>
-            <li><i>italic</i></li>
-            <li><code>code</code></li></ul>
-            <blockquote><b>bold</b>
-            <i>italic</i>
-            <code>code</code></blockquote>
-            """,
+"""<div><h1>heading <b>with</b> bold</h1><h2><i>italic</i> heading</h2><h3>head<code>in</code>g</h3><h4><code>heading</code></h4><h5><b>heading</b></h5><h6><i>heading</i></h6><ol><li><b>bold</b></li><li><i>italic</i></li><li><code>code</code></li></ol><ul><li><b>bold</b></li><li><i>italic</i></li><li><code>code</code></li></ul><quoteblock><b>bold</b><i>italic</i><code>code</code></quoteblock></div>""",
         )
 
 

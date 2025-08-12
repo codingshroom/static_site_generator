@@ -1,6 +1,7 @@
 from enum import Enum
 
 
+
 class BlockType(Enum):
     PARA = "paragraph"
     HEAD = "heading"
@@ -48,7 +49,7 @@ def blocktype_to_tag(blocktype):
     if blocktype == BlockType.CODE:
         return "code"
     if blocktype == BlockType.QUOT:
-        return "quoteblock"
+        return "blockquote"
     if blocktype == BlockType.OLST:
         return "ol"
     if blocktype == BlockType.ULST:
