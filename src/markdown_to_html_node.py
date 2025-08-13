@@ -13,6 +13,7 @@ def markdown_to_html_node(markdown):
         block_type = block_to_blocktype(block)
         tag = blocktype_to_tag(block_type)
         block_node = ParentNode(tag, [])
+
         if block_type == BlockType.CODE:
             stripped_block = strip_code_block(block)
             inner_node = LeafNode("code", stripped_block)
