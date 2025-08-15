@@ -153,15 +153,15 @@ we have here an ordered list:
 
     def test_quotes(self):
         md = """
->who cares
->nobody wants to know
->what else?
+> who cares
+> nobody wants to know
+> what else?
 """
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><quoteblock>who cares\nnobody wants to know\nwhat else?</quoteblock></div>",
+            "<div><blockquote>who cares\nnobody wants to know\nwhat else?</blockquote></div>",
         )
 
 
@@ -187,15 +187,15 @@ we have here an ordered list:
 - _italic_
 - `code`
 
->**bold**
->_italic_
->`code`
+> **bold**
+> _italic_
+> `code`
 """
         node = markdown_to_html_node(md)
         html = node.to_html()
         self.assertEqual(
             html,
-"""<div><h1>heading <b>with</b> bold</h1><h2><i>italic</i> heading</h2><h3>head<code>in</code>g</h3><h4><code>heading</code></h4><h5><b>heading</b></h5><h6><i>heading</i></h6><ol><li><b>bold</b></li><li><i>italic</i></li><li><code>code</code></li></ol><ul><li><b>bold</b></li><li><i>italic</i></li><li><code>code</code></li></ul><quoteblock><b>bold</b>\n<i>italic</i>\n<code>code</code></quoteblock></div>""",
+"""<div><h1>heading <b>with</b> bold</h1><h2><i>italic</i> heading</h2><h3>head<code>in</code>g</h3><h4><code>heading</code></h4><h5><b>heading</b></h5><h6><i>heading</i></h6><ol><li><b>bold</b></li><li><i>italic</i></li><li><code>code</code></li></ol><ul><li><b>bold</b></li><li><i>italic</i></li><li><code>code</code></li></ul><blockquote><b>bold</b>\n<i>italic</i>\n<code>code</code></blockquote></div>""",
         )
 
 

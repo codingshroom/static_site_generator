@@ -49,7 +49,7 @@ def blocktype_to_tag(blocktype):
     if blocktype == BlockType.CODE:
         return "code"
     if blocktype == BlockType.QUOT:
-        return "blockquote"
+        return "quoteblock"
     if blocktype == BlockType.OLST:
         return "ol"
     if blocktype == BlockType.ULST:

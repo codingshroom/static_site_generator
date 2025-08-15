@@ -24,11 +24,11 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, props)
         self.tag = tag  # string
         self.value = value  # string
+        if value is None:
+            raise ValueError("missing value")
         self.props = props  # dictionary with attributes in a given tag
     
     def to_html(self):
-        if not self.value:
-            raise ValueError("missing value")
         if not self.tag:
             return self.value
         else:
@@ -41,24 +41,23 @@ class LeafNode(HTMLNode):
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
         super().__init__(tag, children, props)
+        if tag is None:
+            raise ValueError("missing tag")
+        if not children:
+            raise ValueError("missing children")
         self.tag = tag
         self.children = children
         self.props = props
 
     def to_html(self):
-        if not self.tag:
-            raise ValueError("missing tag")
-        if not self.children:
-            raise ValueError("missing children")
-        else:
-            formatted_props = ""
-            if self.props:
-                formatted_props = self.props_to_html()
-            super_concatenation = f"<{self.tag}{formatted_props}>"
-            for child in self.children:
-                child_html = child.to_html()
-                super_concatenation += child_html
-            return super_concatenation + f"</{self.tag}>"
+        formatted_props = ""
+        if self.props:
+            formatted_props = self.props_to_html()
+        super_concatenation = f"<{self.tag}{formatted_props}>"
+        for child in self.children:
+            child_html = child.to_html()
+            super_concatenation += child_html
+        return super_concatenation + f"</{self.tag}>"
         
 
 

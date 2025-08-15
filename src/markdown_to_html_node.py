@@ -22,7 +22,7 @@ def markdown_to_html_node(markdown):
         elif block_type == BlockType.QUOT:
             stripped_block = strip_quote_block(block)
             children = text_to_textnodes(stripped_block)
-            block_node = ParentNode("quoteblock", [])
+            block_node = ParentNode("blockquote", [])
             for child in children:
                 html_child = text_node_to_htmlnode(child)
                 block_node.children.append(html_child)

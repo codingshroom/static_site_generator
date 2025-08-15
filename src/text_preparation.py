@@ -15,7 +15,7 @@ def strip_quote_block(block):
     lines = block.split("\n")
     new_lines = []
     for line in lines:
-        new_lines.append(line[1:])
+        new_lines.append(line[2:])
     new_block = "\n".join(new_lines)
     return new_block
 
