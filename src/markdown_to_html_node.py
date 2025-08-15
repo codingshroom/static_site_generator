@@ -63,6 +63,5 @@ def block_node_from_list(block, tag, start_index):
 
 
 
-
 if __name__ == "__main__":
     pass

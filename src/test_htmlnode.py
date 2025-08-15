@@ -117,11 +117,10 @@ class TestHMTLNode(unittest.TestCase):
     def test_parent_no_tag(self):
         child_1 = LeafNode("h", "tml")
         child_2 = LeafNode("b", "odor")
-        parent = ParentNode(None, children=[child_1, child_2])
-        with self.assertRaises(ValueError) as cm:
-            parent.to_html()
-        self.assertEqual(str(cm.exception), "missing tag")
+        with self.assertRaises(ValueError):
+            parent = ParentNode(None, children=[child_1, child_2])
     
+
     def test_deeeeep_nesting(self):
         child_1 = LeafNode("h", "tml")
         child_2 = LeafNode(None, "genius")
@@ -150,15 +149,14 @@ class TestHMTLNode(unittest.TestCase):
         child_1 = LeafNode("h", "tml")
         child_2 = LeafNode(None, "genius")
         child_3 = LeafNode("p", "hi")
+        child_4 = LeafNode("x", "hi")
         parent_1 = ParentNode("p", [child_1])
         parent_2 = ParentNode("body", [parent_1], {"href": "why", "calc": "42"})
-        parent_3 = ParentNode(None, [parent_2, child_2])
+        parent_3 = ParentNode("html", [parent_2, child_2])
         parent_4 = ParentNode("super", [parent_3])
         parent_5 = ParentNode("god", [child_3, parent_4], {"allah": "the one"})
-        with self.assertRaises(ValueError) as cm:
-            parent_5.to_html()
-        self.assertNotEqual(str(cm.exception), '<god allah="the one"><p>hi</p><super><html><body href="why" calc="42"><p><h>tml</h></p></body>genius</html></super></god>')
-
+        with self.assertRaises(ValueError):
+            parent_6 = ParentNode(None, [child_4])
 
 
 if __name__ == "__main__":

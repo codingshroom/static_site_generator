@@ -41,23 +41,24 @@ class LeafNode(HTMLNode):
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
         super().__init__(tag, children, props)
-        if tag is None:
+        if self.tag is None:
             raise ValueError("missing tag")
-        if not children:
-            raise ValueError("missing children")
         self.tag = tag
         self.children = children
         self.props = props
 
     def to_html(self):
-        formatted_props = ""
-        if self.props:
-            formatted_props = self.props_to_html()
-        super_concatenation = f"<{self.tag}{formatted_props}>"
-        for child in self.children:
-            child_html = child.to_html()
-            super_concatenation += child_html
-        return super_concatenation + f"</{self.tag}>"
+        if not self.children:
+            raise ValueError("missing children")
+        else:
+            formatted_props = ""
+            if self.props:
+                formatted_props = self.props_to_html()
+            super_concatenation = f"<{self.tag}{formatted_props}>"
+            for child in self.children:
+                child_html = child.to_html()
+                super_concatenation += child_html
+            return super_concatenation + f"</{self.tag}>"
         
 
 
